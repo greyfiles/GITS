@@ -1,8 +1,8 @@
-# About gits diff
+# About GITS Diff
 This command is used to display the difference from the last commit.
 
 # Location of Code
-The code that implements the above mentioned gits functionality is located [here](https://github.com/harshitpatel96/GITS/blob/master/code/gits_diff.py).
+The code that implements the above mentioned gits functionality is located [here](https://github.com/greyfiles/GITS/blob/master/code/gits_diff.py).
 
 # Code Description
 ## Functions

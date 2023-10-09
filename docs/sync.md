@@ -1,10 +1,10 @@
-# About gits sync
+# About GITS Sync
 This command is particularly useful for developers who always work off the master branch on their own development branch. 
 In this type of development, it is necessary to keep the development branch upto date with upstream master in order to avoid any merge comflicts in future.
 gits sync command basically sync the current branch with upstream trunk (main/master) branch by first syncing the trunk branch and rebasing current branch on the synced trunk.
 
 # Location of Code
-The code that implements the above mentioned gits functionality is located [here](https://github.com/harshitpatel96/GITS/blob/master/code/gits_sync.py).
+The code that implements the above mentioned gits functionality is located [here](https://github.com/greyfiles/GITS/blob/master/code/gits_sync.py).
 
 # Code Description
 ## Functions

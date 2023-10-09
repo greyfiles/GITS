@@ -1,9 +1,9 @@
-# About gits undo
+# About GITS Undo
 This command is useful when the changes you've made after last commit is not working well and you want to update your working directory with last stable commit instead of manually undoing the changes.
 Be careful while using this command because changes present in the working directory will be lost after execution of this command.
 
 # Location of Code
-The code that implements the above mentioned gits functionality is located [here](https://github.com/harshitpatel96/GITS/blob/master/code/gits_undo.py).
+The code that implements the above mentioned gits functionality is located [here](https://github.com/greyfiles/GITS/blob/master/code/gits_undo.py).
 
 # Code Description
 ## Functions

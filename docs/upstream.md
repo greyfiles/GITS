@@ -1,9 +1,9 @@
-# About gits set upstream
-This command set upstream for a local branch to a remote branch.
+# About GITS Upstream
+This command will set upstream for a local branch to a remote branch.
 It can also be used to set upstream for a remote branch to the original branch in case of a forked repo.
 
 # Location of Code
-The code that implements the above mentioned gits functionality is located [here](https://github.com/harshitpatel96/GITS/blob/master/code/gits_setupstream.py).
+The code that implements the above mentioned gits functionality is located [here](https://github.com/greyfiles/GITS/blob/master/code/gits_setupstream.py).
 
 # Code Description
 ## Functions
