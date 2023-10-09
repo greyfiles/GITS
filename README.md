@@ -52,11 +52,16 @@ VMware Workstation Player & VirtualBox are popular choices for setting up VMs
 If you are on Windows 10 you can opt to use WSL if your prefer that over using a VM
 >   Reference for [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 
+# GITS Commands Docs
+For documentation of the implemented commands please visit [GITS/docs](https://github.com/greyfiles/GITS/tree/master/docs)
+A few of the commands implemented are:
+- [gits_branch](https://github.com/greyfiles/GITS/blob/master/code/gits_branch.py)
+- [gits_commit](https://github.com/greyfiles/GITS/blob/master/code/gits_commit.py)
+- [gits_status](https://github.com/greyfiles/GITS/blob/master/code/gits_status.py)
+
 # Want to Contribute?
 If you are looking to contribute please take a look at our [CONTRIBUTING.md](https://github.com/greyfiles/GITS/blob/master/CONTRIBUTING.md) where we provide instructions on contributing to the repository.
 
-# Functionality Docs
-For documentation of the implemented functionality please visit [GITS/docs](https://github.com/greyfiles/GITS/tree/master/docs)
 
 ### Quantitative measures
 Here are some measures that can help compare the results between traditional git and gits.

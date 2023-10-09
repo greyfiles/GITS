@@ -20,3 +20,6 @@
 6. Make this tool available for windows operating system as well.
 7. New functionalities:
     - gits checkout
+8. Add documentation for:
+    - gits_add
+    - gits_set
