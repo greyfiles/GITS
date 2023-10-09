@@ -43,9 +43,9 @@
     Note: Open the .bashrc file in User home directory to make sure that the alias command does not have any white spaces in the path. If so, rename the directory to remove the white spaces and re-run the setup.
 
 # Installation for Windows
-Currently this project cannot be run on Windows.
-If you are on a Windows machine we recommend setting up a virtual machine to run Linux using VMware Workstation Player or VirtualBox. Both are popular choices for setting up VMs
->   Reference for [VirtualBox](https://www.virtualbox.org/)
+Currently this project cannot be run on Windows<br>
+If you are on a Windows machine we recommend setting up a virtual machine to run Linux using VMware Workstation Player or VirtualBox<br> Both are popular choices for setting up VMs
+>   Reference for [VirtualBox](https://www.virtualbox.org/)<br>
 >   Reference for [VMware Workplayer Station](https://www.vmware.com/content/vmware/vmware-published-sites/us/products/workstation-player.html.html#:~:text=Product,-See%20All&text=What%20is%20VMware%20Workstation%20Player,for%20free%20for%20personal%20use)
 
 If you are on Windows 10 you can opt to use WSL if your prefer that over using a VM
