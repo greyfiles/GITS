@@ -20,7 +20,7 @@
 **GITS**, or **Git-Simplified**, is a wrapper for mainstream Git functionality. By using fewer commands we allow users to increase efficiency and create a better workflow
 
 # Installation for Linux
-**1.** Clone GITS repository
+**1.** Clone GITS repository<br>
 **2.** While in the root directory run the following command:
     ```
     pip install -r requirements.txt
