@@ -1,6 +1,7 @@
 import subprocess
 from subprocess import PIPE
 import helper
+import gits_logging
 
 
 def gits_sync(args):
@@ -60,7 +61,11 @@ def gits_sync(args):
         stdout, stderr = process5.communicate()
         print(stdout.decode('utf-8'))
 
+        gits_logging.gits_logger.info("gits sync command invoked successfully")
+
     except Exception as e:
+        gits_logging.gits_logger.error("gits sync command caught an exception")
+        gits_logging.gits_logger.error("{}".format(str(e)))
         print("ERROR: gits sync command caught an exception")
         print("ERROR: {}".format(str(e)))
         return False
