@@ -27,6 +27,7 @@ def gits_add_func(args):
             process = subprocess.Popen(
                 subprocess_command, stdout=PIPE, stderr=PIPE)
             stdout, stderr = process.communicate()
+            gits_logging.gits_logger.info("gits add command invoked successfully")
 
     except Exception as e:
         gits_logging.gits_logger.error("gits add command caught an exception")

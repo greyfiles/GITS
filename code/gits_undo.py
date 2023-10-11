@@ -22,6 +22,7 @@ def gits_undo(args):
             process = subprocess.Popen(
                 subprocess_command, stdout=PIPE, stderr=PIPE)
             stdout, stderr = process.communicate()
+            gits_logging.gits_logger.info("gits undo command invoked successfully")
 
     except Exception as e:
         gits_logging.gits_logger.error("gits undo command caught an exception")
