@@ -2,6 +2,7 @@
 
 from subprocess import PIPE
 import subprocess
+import gits_logging
 
 
 def gits_commit_func(args):
@@ -31,9 +32,12 @@ def gits_commit_func(args):
         process = subprocess.Popen(
             subprocess_command, stdout=PIPE, stderr=PIPE)
         stdout, stderr = process.communicate()
+        gits_logging.gits_logger.info("gits commit command invoked successfully")
         print("your changes committed successfully.")
 
     except Exception as e:
+        gits_logging.gits_logger.error("gits commit command caught an exception")
+        gits_logging.gits_logger.error("{}".format(str(e)))
         print("ERROR: gits commit command caught an exception")
         print("ERROR: {}".format(str(e)))
         return False

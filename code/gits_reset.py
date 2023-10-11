@@ -1,5 +1,6 @@
 import subprocess
 from subprocess import PIPE
+import gits_logging
 
 
 def gits_reset(args):
@@ -15,8 +16,11 @@ def gits_reset(args):
         process2 = subprocess.Popen(
             ['git', 'reset', '--hard', args.branch], stdout=PIPE, stderr=PIPE)
         stdout, stderr = process2.communicate()
+        gits_logging.gits_logger.info("gits reset command invoked successfully")
         print("Current branch reset successful.")
     except Exception as e:
+        gits_logging.gits_logger.error("gits reset command caught an exception")
+        gits_logging.gits_logger.error("{}".format(str(e)))
         print("ERROR: gits reset command caught an exception")
         print("ERROR: {}".format(str(e)))
         return False

@@ -1,5 +1,6 @@
 import subprocess
 from subprocess import PIPE
+import gits_logging
 
 
 def gits_delete(args):
@@ -20,8 +21,11 @@ def gits_delete(args):
         process3 = subprocess.Popen(
             ['git', 'push', '--force'], stdout=PIPE, stderr=PIPE)
         stdout, stderr = process3.communicate()
+        gits_logging.gits_logger.info("gits delete command invoked successfully")
         print('Last ' + str(args.count) + ' commits have been deleted')
     except Exception as e:
+        gits_logging.gits_logger.error("gits delete command caught an exception")
+        gits_logging.gits_logger.error("{}".format(str(e)))
         print("ERROR: gits reset command caught an exception")
         print("ERROR: {}".format(str(e)))
         return False

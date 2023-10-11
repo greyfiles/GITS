@@ -1,4 +1,5 @@
 from subprocess import Popen, PIPE
+import gits_logging
 
 
 def gits_init(args):
@@ -26,9 +27,12 @@ def gits_init(args):
 
         process = Popen(process_commands, stdout=PIPE, stderr=PIPE)
         stdout, stderr = process.communicate()
+        gits_logging.gits_logger.info("gits init command invoked successfully")
         print(stdout.decode("UTF-8"))
 
     except Exception as e:
+        gits_logging.gits_logger.error("gits init command caught an exception")
+        gits_logging.gits_logger.error("{}".format(str(e)))
         print("ERROR: gits init command caught an exception")
         print("ERROR: {}".format(str(e)))
         return False
