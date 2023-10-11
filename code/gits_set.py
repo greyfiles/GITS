@@ -23,6 +23,8 @@ def gits_set_func(args):
             return False
 
     except Exception as e:
+        gits_logging.gits_logger.error("gits set command caught an exception")
+        gits_logging.gits_logger.error("{}".format(str(e)))
         print("ERROR: gits set command caught an exception")
         print("ERROR: {}".format(str(e)))
         return False

@@ -1,5 +1,6 @@
 import subprocess
 from subprocess import PIPE
+import gits_logging
 
 
 def upstream(args):
@@ -64,9 +65,12 @@ def upstream(args):
                 process3 = subprocess.Popen(remote_upstream_command,
                                             stdout=PIPE, stderr=PIPE)
                 stdout, stderr = process3.communicate()
+        gits_logging.gits_logger.info("gits setupstream command invoked successfully")
 
     except Exception as e:
-        print("ERROR: gits commit command caught an exception")
+        gits_logging.gits_logger.error("gits setupstream command caught an exception")
+        gits_logging.gits_logger.error("{}".format(str(e)))
+        print("ERROR: gits setupstream command caught an exception")
         print("ERROR: {}".format(str(e)))
         return False
 

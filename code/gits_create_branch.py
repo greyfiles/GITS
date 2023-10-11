@@ -3,6 +3,7 @@
 from subprocess import PIPE
 import helper
 import subprocess
+import gits_logging
 
 
 def create_branch(args):
@@ -38,9 +39,12 @@ def create_branch(args):
         checkout_feature.append(args.b)
         process3 = subprocess.Popen(checkout_feature, stdout=PIPE, stderr=PIPE)
         stdout, stderr = process3.communicate()
+        gits_logging.gits_logger.info("gits create command invoked successfully")
         print("Branch created successfully. Currently you are on branch:", args.b)
 
     except Exception as e:
+        gits_logging.gits_logger.error("gits create command caught an exception")
+        gits_logging.gits_logger.error("{}".format(str(e)))
         print("ERROR: gits create command caught an exception")
         print("ERROR: {}".format(str(e)))
         return False

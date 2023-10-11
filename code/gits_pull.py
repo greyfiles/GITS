@@ -1,6 +1,7 @@
 import subprocess
 from subprocess import PIPE
 import helper
+import gits_logging
 
 
 def gits_pull(args):
@@ -41,9 +42,12 @@ def gits_pull(args):
         pull_command = ["git", "pull"] + ["origin"] + arguments
         process1 = subprocess.Popen(pull_command, stdout=PIPE, stderr=PIPE)
         stdout, stderr = process1.communicate()
+        gits_logging.gits_logger.info("gits pull command invoked successfully")
         print(stdout.decode("utf-8"))
 
     except Exception as e:
+        gits_logging.gits_logger.error("gits pull command caught an exception")
+        gits_logging.gits_logger.error("{}".format(str(e)))
         print("ERROR: gits pull command caught an exception")
         print("ERROR: {}".format(str(e)))
         return False
