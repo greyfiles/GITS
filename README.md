@@ -20,27 +20,29 @@
 **GITS**, or **Git-Simplified**, is a wrapper for mainstream Git functionality. By using fewer commands we allow users to increase efficiency and create a better workflow
 
 # Installation for Linux
-**1.** Clone GITS repository<br>
-**2.** While in the root directory run the following command:
-    ```
-    pip install -r requirements.txt
-    ```
-**3.** Now go to the configurations directory and run the following command:
+**1.** Clone GITS repository
 
-    For Linux systems with a bash terminal or Windows systems using WSL run:
-    ```
-    bash project_init.sh
-    ```
-    For Linux systems with a fish terminal run:
-    ```
-    fish project_init.fish
-    ```
-**4.** Source the bashrc file
-    ```
-    source ~/.bashrc
-    ```
+**2.** While in the root directory run the following command:
+```
+pip install -r requirements.txt
+```
+
+**3.** Now go to the configurations directory and run the following command:
+For Linux systems with a bash terminal or Windows systems using WSL run
+```
+bash project_init.sh
+```
+For Linux systems with a fish terminal run
+```
+fish project_init.fish
+```
     
-    Note: Open the .bashrc file in User home directory to make sure that the alias command does not have any white spaces in the path. If so, rename the directory to remove the white spaces and re-run the setup.
+**4.** Source the bashrc file:
+```
+source ~/.bashrc
+```
+<br>
+Note: Open the .bashrc file in User home directory to make sure that the alias command does not have any white spaces in the path. If so, rename the directory to remove the white spaces and re-run the setup.
 
 # Installation for Windows
 Currently this project cannot be run on Windows<br>
