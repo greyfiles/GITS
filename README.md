@@ -32,6 +32,8 @@ For Linux systems with a bash terminal or Windows systems using WSL run
 ```
 bash project_init.sh
 ```
+** Note: Make sure that the file has not been automatically converted to using CRLF line endings. Only LF endings will work **
+
 For Linux systems with a fish terminal run
 ```
 fish project_init.fish
