@@ -20,27 +20,29 @@
 **GITS**, or **Git-Simplified**, is a wrapper for mainstream Git functionality. By using fewer commands we allow users to increase efficiency and create a better workflow
 
 # Installation for Linux
-1. Clone GITS repository
-2. While in the root directory run the following command:
-    ```
-    pip install -r requirements.txt
-    ```
-3. Now go to the configurations directory and run the following command:
+**1.** Clone GITS repository
 
-    For Linux systems with a bash terminal or Windows systems using WSL run:
-    ```
-    bash project_init.sh
-    ```
-    For Linux systems with a fish terminal run:
-    ```
-    fish project_init.fish
-    ```
-4. Source the bashrc file
-    ```
-    source ~/.bashrc
-    ```
+**2.** While in the root directory run the following command:
+```
+pip install -r requirements.txt
+```
+
+**3.** Now go to the configurations directory and run the following command:
+For Linux systems with a bash terminal or Windows systems using WSL run
+```
+bash project_init.sh
+```
+For Linux systems with a fish terminal run
+```
+fish project_init.fish
+```
     
-    Note: Open the .bashrc file in User home directory to make sure that the alias command does not have any white spaces in the path. If so, rename the directory to remove the white spaces and re-run the setup.
+**4.** Source the bashrc file:
+```
+source ~/.bashrc
+```
+<br>
+Note: Open the .bashrc file in User home directory to make sure that the alias command does not have any white spaces in the path. If so, rename the directory to remove the white spaces and re-run the setup.
 
 # Installation for Windows
 Currently this project cannot be run on Windows<br>
@@ -52,7 +54,7 @@ If you are on Windows 10 you can opt to use WSL if your prefer that over using a
 >   Reference for [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 
 # GITS Commands Docs
-For documentation of the implemented commands please visit [GITS/docs](https://github.com/greyfiles/GITS/tree/master/docs)
+For documentation of the implemented commands please visit [GITS/docs](https://github.com/greyfiles/GITS/tree/master/docs)<br>
 A few of the commands implemented are:
 - [gits_branch](https://github.com/greyfiles/GITS/blob/master/code/gits_branch.py)
 - [gits_commit](https://github.com/greyfiles/GITS/blob/master/code/gits_commit.py)
@@ -62,13 +64,13 @@ A few of the commands implemented are:
 If you are looking to contribute please take a look at our [CONTRIBUTING.md](https://github.com/greyfiles/GITS/blob/master/CONTRIBUTING.md) where we provide instructions on contributing to the repository.
 
 
-### Quantitative measures
-Here are some measures that can help compare the results between traditional git and gits.
+## Quantitative Measures
+Here are some measures that can help compare the results between traditional **Git** and **GITS**.
 1. Time taken to finish a particular task.
 2. Number of commands executed to complete each task.
 3. Number of time participants referred to the documentation or any other resources.
 
-### Qualitative measures
-Along with quantitative measures described above, few qualitative measures can help to assess the performance better.
-1. Familiarity with traditional git
-2. hardness of the task
+## Qualitative Measures
+Along with quantitative measures described above, a few qualitative measures that can help to **assess the performance better**.
+1. Familiarity with traditional Git
+2. Hardness of the task
