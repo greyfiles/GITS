@@ -2,7 +2,7 @@
 
 import sys
 import argparse
-from gits_logging import init_gits_logger
+import gits_logging
 from gits_hello import gits_hello_world
 from gits_add import gits_add_func
 from gits_commit import gits_commit_func
@@ -30,7 +30,7 @@ from gits_init import gits_init
 from gits_pull import gits_pull
 from gits_super_init import gits_super_init
 
-logger_status = init_gits_logger()
+logger_status = gits_logging.init_gits_logger()
 if not logger_status:
     print("ERROR: logger not initialised")
     sys.exit(1)

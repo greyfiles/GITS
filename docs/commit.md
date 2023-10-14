@@ -1,14 +1,14 @@
-# About gits commit
+# About GITS Commit
 This command is used to commit changes present inside the staging area. 
 
 # Location of Code
-The code that implements the above mentioned gits functionality is located [here](https://github.com/harshitpatel96/GITS/blob/master/code/gits_commit.py).
+The code that implements the above mentioned gits functionality is located [here](https://github.com/greyfiles/GITS/blob/master/code/gits_commit.py).
 
 # Code Description
 ## Functions
 1. gits_commit_func(args):
-this function takes **args** object as an input which has an attribute **m** to store the commit message and another boolean attribute **amend**. 
-If **amend** is set to true, command will not create new commit. Instead, it will simply add changes to the last commit.
+This function takes **args** object as an input which has an attribute **-m** to store the commit message and another boolean attribute **-amend**. 
+If **-amend** is set to true, command will not create new commit. Instead, it will simply add changes to the last commit.
 Function returns True for successful execution and False otherwise with an exception.
 
 

@@ -1,8 +1,8 @@
-# About gits merge
+# About GITS Merge
 This command is used to merge your changes back to the base branch from which you've checked out your personal development branch.
 
 # Location of Code
-The code that implements the above mentioned gits functionality is located [here](https://github.com/harshitpatel96/GITS/blob/master/code/gits_merge.py).
+The code that implements the above mentioned gits functionality is located [here](https://github.com/greyfiles/GITS/blob/master/code/gits_merge.py).
 
 # Code Description
 ## Functions

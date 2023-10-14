@@ -1,8 +1,8 @@
-# About gits push
+# About GITS Push
 This function allows user to push local commits to remote branch.
 
 # Location of Code
-The code that implements this gits functionality is located [here](https://github.com/harshitpatel96/GITS/blob/master/code/gits_push.py)
+The code that implements this gits functionality is located [here](https://github.com/greyfiles/GITS/blob/master/code/gits_push.py)
 
 # Code Description
 ## Functions

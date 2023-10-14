@@ -1,8 +1,8 @@
-# About gits pull
+# About GITS Pull
 This function allows user to pull remote branch and merge it into local branch.
 
 # Location of Code
-The code that implements this gits functionality is located [here](https://github.com/harshitpatel96/GITS/blob/master/code/gits_pull.py)
+The code that implements this gits functionality is located [here](https://github.com/greyfiles/GITS/blob/master/code/gits_pull.py)
 
 # Code Description
 ## Functions

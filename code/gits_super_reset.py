@@ -3,6 +3,7 @@
 import os
 from subprocess import check_output
 import shutil
+import gits_logging
 
 
 def super_reset(args):
@@ -31,8 +32,11 @@ def super_reset(args):
         shutil.rmtree(args.name)
         print("Freshly cloning...")
         check_output(["git", "clone", remote_loc])
+        gits_logging.gits_logger.info("gits super reset command invoked successfully")
 
     except Exception as e:
+        gits_logging.gits_logger.error("gits super reset command caught an exception")
+        gits_logging.gits_logger.error("{}".format(str(e)))
         print("ERROR: gits super reset command caught an exception")
         print("ERROR: {}".format(str(e)))
         return False

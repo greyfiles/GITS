@@ -2,6 +2,7 @@
 
 from subprocess import PIPE
 import subprocess
+import gits_logging
 
 
 def switch_branch(args):
@@ -15,9 +16,12 @@ def switch_branch(args):
         switch_cmd.append(args.branch_name)
         process1 = subprocess.Popen(switch_cmd, stdout=PIPE, stderr=PIPE)
         stdout, stderr = process1.communicate()
+        gits_logging.gits_logger.info("gits switch command invoked successfully")
         print("Switched to branch:", args.branch_name)
 
     except Exception as e:
+        gits_logging.gits_logger.error("gits switch command caught an exception")
+        gits_logging.gits_logger.error("{}".format(str(e)))
         print("ERROR: gits switch command caught an exception")
         print("ERROR: {}".format(str(e)))
         return False
