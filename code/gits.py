@@ -28,6 +28,7 @@ from gits_diff import gits_diff
 from gits_branch import gits_branch
 from gits_init import gits_init
 from gits_pull import gits_pull
+from gits_super_init import gits_super_init
 
 logger_status = init_gits_logger()
 if not logger_status:
@@ -176,5 +177,19 @@ gits_pull_subparser.add_argument("--branch", nargs="?", default=False,
                                  required=False)
 gits_pull_subparser.set_defaults(func=gits_pull)
 
+gits_super_init_subparser = subparsers.add_parser('super_init', 
+    help='Initializes a new git repo, adds default README.md and .gitignore, and commits them.')
+gits_super_init_subparser.add_argument('--readme-name', default='README.md',
+    help='Custom name for the README file. Default is README.md.')
+gits_super_init_subparser.add_argument('--gitignore-content', default='',
+    help='Content to add in the .gitignore file. By default, it will be empty.')
+gits_super_init_subparser.set_defaults(func=gits_super_init)
+
+
 args = parser.parse_args()
-args.func(args)
+
+if hasattr(args, 'func'):
+    args.func(args)
+else:
+    parser.print_help()
+    sys.exit(1)
