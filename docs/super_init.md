@@ -2,7 +2,7 @@
 The `gits super_init` command is a supercharged version of the regular `git init`. It not only initializes the repository but also creates a default `README.md` and `.gitignore` file. These files are immediately staged and committed. Optionally, if a remote repository URL is provided, it pushes the initial commit to the specified remote, making the setup process efficient and seamless.
 
 # Location of Code
-The code that implements this enhanced gits functionality is located [here](https://github.com/harshitpatel96/GITS/blob/master/code/gits_super_init.py).
+The code that implements this enhanced gits functionality is located [here](https://github.com/greyfiles/GITS/blob/master/code/gits_super_init.py).
 
 # Code Description
 ## Functions
