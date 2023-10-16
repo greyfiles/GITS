@@ -3,6 +3,7 @@
 import sys
 import argparse
 import gits_logging
+import click
 from gits_hello import gits_hello_world
 from gits_add import gits_add_func
 from gits_commit import gits_commit_func
@@ -35,161 +36,190 @@ if not logger_status:
     print("ERROR: logger not initialised")
     sys.exit(1)
 
-parser = argparse.ArgumentParser()
-subparsers = parser.add_subparsers()
 
-gits_hello_subparser = subparsers.add_parser('hello_world')
-gits_hello_subparser.set_defaults(func=gits_hello_world)
+@click.group()
+def cli():
+    """gits: the wrapper CLI for git functions"""
+    pass
 
-gits_set_subparser = subparsers.add_parser('set')
-gits_set_subparser.add_argument('--parent', help='git parent branch')
-gits_set_subparser.set_defaults(func=gits_set_func)
+#parser = argparse.ArgumentParser()
+#subparsers = parser.add_subparsers()
+@cli.command('hello', short_help='should be hidden...')
+def hello():
+    gits_hello_world()
 
-gits_add_subparser = subparsers.add_parser('add')
-gits_add_subparser.add_argument('file_names',
-                                metavar='N',
-                                type=str,
-                                nargs='+',
-                                help='all file names')
-gits_add_subparser.set_defaults(func=gits_add_func)
+#gits_hello_subparser = subparsers.add_parser('hello_world')
+#gits_hello_subparser.set_defaults(func=gits_hello_world)
 
-gits_commit_subparser = subparsers.add_parser('commit')
-gits_commit_subparser.add_argument('-m',
-                                   required=True,
-                                   help='git commit message')
-gits_commit_subparser.add_argument('--amend',
-                                   action='store_true',
-                                   help='amend commit message')
-gits_commit_subparser.set_defaults(func=gits_commit_func)
+@cli.command('set', short_help='set a variable')
+@click.argument('parent', nargs=1, type=click.STRING)
+def set(parent):
+    """
+    Function that is used to set important
+    environment variables
+    """
+    gits_set_func(parent)
 
-gits_create_subparser = subparsers.add_parser('create')
-gits_create_subparser.add_argument('-b', help="branch name to create")
-gits_create_subparser.set_defaults(func=create_branch)
+#gits_set_subparser = subparsers.add_parser('set')
+#gits_set_subparser.add_argument('--parent', help='git parent branch')
+#gits_set_subparser.set_defaults(func=gits_set_func)
 
-gits_switch_subparser = subparsers.add_parser('switch')
-gits_switch_subparser.add_argument('branch_name', help="branch name to switch")
-gits_switch_subparser.set_defaults(func=switch_branch)
+#@click.command('add')
+#@click.argument('file_names', nargs=-1, help='file names to add')
+#def set(file_names):
+#    """
+#    Function that is used to set important
+#    environment variables
+#    """
+#    gits_add_func(file_names)
+#gits_add_subparser = subparsers.add_parser('add')
+#gits_add_subparser.add_argument('file_names',
+#                                metavar='N',
+#                                type=str,
+#                                nargs='+',
+#                                help='all file names')
+#gits_add_subparser.set_defaults(func=gits_add_func)
+#
+#gits_commit_subparser = subparsers.add_parser('commit')
+#gits_commit_subparser.add_argument('-m',
+#                                   required=True,
+#                                   help='git commit message')
+#gits_commit_subparser.add_argument('--amend',
+#                                   action='store_true',
+#                                   help='amend commit message')
+#gits_commit_subparser.set_defaults(func=gits_commit_func)
+#
+#gits_create_subparser = subparsers.add_parser('create')
+#gits_create_subparser.add_argument('-b', help="branch name to create")
+#gits_create_subparser.set_defaults(func=create_branch)
+#
+#gits_switch_subparser = subparsers.add_parser('switch')
+#gits_switch_subparser.add_argument('branch_name', help="branch name to switch")
+#gits_switch_subparser.set_defaults(func=switch_branch)
+#
+#gits_merge_subparser = subparsers.add_parser('merge')
+#gits_merge_subparser.add_argument('branch_name', help="branch name to merge")
+#gits_merge_subparser.set_defaults(func=merge_branch)
+#
+#gits_upstream_subparser = subparsers.add_parser('upstream')
+#gits_upstream_subparser.add_argument('--remote',
+#                                     help='the remote branch name')
+#gits_upstream_subparser.add_argument('--local',
+#                                     help="local branch name")
+#gits_upstream_subparser.add_argument('--upstream',
+#                                     help="the upstream branch name")
+#gits_upstream_subparser.set_defaults(func=upstream)
+#
+#gits_profile_subparser = subparsers.add_parser('profile', help='profie help')
+#gits_profile_subparser.set_defaults(func=gits_set_profile)
+#gits_profile_subparser.add_argument('--email',
+#                                    required=True,
+#                                    help='email to be used')
+#gits_profile_subparser.add_argument('--name',
+#                                    required=True,
+#                                    help='name to be used')
+#
+#gits_super_reset_subparser = subparsers.add_parser('super-reset')
+#gits_super_reset_subparser.add_argument('--name',
+#                                        help="Name of the repository to super reset")
+#gits_super_reset_subparser.set_defaults(func=super_reset)
+#
+#gits_rb_subparser = subparsers.add_parser('rebase', help='sync help')
+#gits_rb_subparser.set_defaults(func=gits_rebase)
+#
+#gits_status_subparser = subparsers.add_parser('status', help='sync help')
+#gits_status_subparser.set_defaults(func=gits_status)
+#
+#gits_diff_subparser = subparsers.add_parser('diff', help='sync help')
+#gits_diff_subparser.set_defaults(func=gits_diff)
+#
+#gits_branch_subparser = subparsers.add_parser('branch', help='sync help')
+#gits_branch_subparser.set_defaults(func=gits_branch)
+#
+#gits_reset_subparser = subparsers.add_parser('reset', help='sync help')
+#gits_reset_subparser.set_defaults(func=gits_reset)
+#gits_reset_subparser.add_argument(
+#    '--branch', required=True, help='branch to be used')
+#
+#gits_reset_subparser = subparsers.add_parser('delete', help='sync help')
+#gits_reset_subparser.set_defaults(func=gits_delete)
+#gits_reset_subparser.add_argument(
+#    '--branch', required=True, help='branch to be used')
+#gits_reset_subparser.add_argument(
+#    '--count', required=True, help='Last commits to be deleted')
+#
+#gits_track_subparser = subparsers.add_parser('track')
+#gits_track_subparser.add_argument('file_names',
+#                                  metavar='N',
+#                                  type=str,
+#                                  nargs='+',
+#                                  help='all file names')
+#gits_track_subparser.set_defaults(func=gits_track)
+#
+#gits_untrack_subparser = subparsers.add_parser('untrack')
+#gits_untrack_subparser.add_argument('file_names',
+#                                    metavar='N',
+#                                    type=str,
+#                                    nargs='+',
+#                                    help='all file names')
+#gits_untrack_subparser.set_defaults(func=gits_untrack)
+#
+#gits_undo_subparser = subparsers.add_parser('undo')
+#gits_undo_subparser.add_argument('file_names',
+#                                 metavar='N',
+#                                 type=str,
+#                                 nargs='+',
+#                                 help='all file names')
+#gits_undo_subparser.set_defaults(func=gits_undo)
+#
+#gits_sync_subparser = subparsers.add_parser('sync')
+#gits_sync_subparser.add_argument('-source', help="name of the trunk branch")
+#gits_sync_subparser.set_defaults(func=gits_sync)
+#
+#gits_push_subparser = subparsers.add_parser('push')
+#gits_push_subparser.add_argument("--rebase", nargs=1, default=False,
+#                                 help="do a pull rebase before pushing the changes",
+#                                 required=False)
+#gits_push_subparser.set_defaults(func=gits_push)
+#
+#gits_init_subparser = subparsers.add_parser("init")
+#
+#gits_init_subparser.add_argument("--bare", action="store_true",
+#                                 help="intialize an empty git repositories but omit the working directory")
+#gits_init_subparser.add_argument(
+#    "--template", help="initialize a git repository using predifined templates")
+#gits_init_subparser.add_argument(
+#    "--clone_url", help="url for cloning an already existing repo")
+#gits_init_subparser.set_defaults(func=gits_init)
+#
+#gits_pull_subparser = subparsers.add_parser("pull")
+#gits_pull_subparser.add_argument("--nocommit", action='store_true',
+#                                 help="fetches the remote contain but does not create a new merge commit",
+#                                 required=False)
+#gits_pull_subparser.add_argument("--rebase", action='store_true',
+#                                 help="uses git rebase to merge with the remote branch",
+#                                 required=False)
+#gits_pull_subparser.add_argument("--branch", nargs="?", default=False,
+#                                 help="you can specify the branch you want to pull",
+#                                 required=False)
+#gits_pull_subparser.set_defaults(func=gits_pull)
+#
+#gits_super_init_subparser = subparsers.add_parser('super_init', 
+#    help='Initializes a new git repo, adds default README.md and .gitignore, and commits them.')
+#gits_super_init_subparser.add_argument('--readme-name', default='README.md',
+#    help='Custom name for the README file. Default is README.md.')
+#gits_super_init_subparser.add_argument('--gitignore-content', default='',
+#    help='Content to add in the .gitignore file. By default, it will be empty.')
+#gits_super_init_subparser.set_defaults(func=gits_super_init)
+#
+#
+#args = parser.parse_args()
 
-gits_merge_subparser = subparsers.add_parser('merge')
-gits_merge_subparser.add_argument('branch_name', help="branch name to merge")
-gits_merge_subparser.set_defaults(func=merge_branch)
+#if hasattr(args, 'func'):
+#    args.func(args)
+#else:
+#    parser.print_help()
+#    sys.exit(1)
 
-gits_upstream_subparser = subparsers.add_parser('upstream')
-gits_upstream_subparser.add_argument('--remote',
-                                     help='the remote branch name')
-gits_upstream_subparser.add_argument('--local',
-                                     help="local branch name")
-gits_upstream_subparser.add_argument('--upstream',
-                                     help="the upstream branch name")
-gits_upstream_subparser.set_defaults(func=upstream)
-
-gits_profile_subparser = subparsers.add_parser('profile', help='profie help')
-gits_profile_subparser.set_defaults(func=gits_set_profile)
-gits_profile_subparser.add_argument('--email',
-                                    required=True,
-                                    help='email to be used')
-gits_profile_subparser.add_argument('--name',
-                                    required=True,
-                                    help='name to be used')
-
-gits_super_reset_subparser = subparsers.add_parser('super-reset')
-gits_super_reset_subparser.add_argument('--name',
-                                        help="Name of the repository to super reset")
-gits_super_reset_subparser.set_defaults(func=super_reset)
-
-gits_rb_subparser = subparsers.add_parser('rebase', help='sync help')
-gits_rb_subparser.set_defaults(func=gits_rebase)
-
-gits_status_subparser = subparsers.add_parser('status', help='sync help')
-gits_status_subparser.set_defaults(func=gits_status)
-
-gits_diff_subparser = subparsers.add_parser('diff', help='sync help')
-gits_diff_subparser.set_defaults(func=gits_diff)
-
-gits_branch_subparser = subparsers.add_parser('branch', help='sync help')
-gits_branch_subparser.set_defaults(func=gits_branch)
-
-gits_reset_subparser = subparsers.add_parser('reset', help='sync help')
-gits_reset_subparser.set_defaults(func=gits_reset)
-gits_reset_subparser.add_argument(
-    '--branch', required=True, help='branch to be used')
-
-gits_reset_subparser = subparsers.add_parser('delete', help='sync help')
-gits_reset_subparser.set_defaults(func=gits_delete)
-gits_reset_subparser.add_argument(
-    '--branch', required=True, help='branch to be used')
-gits_reset_subparser.add_argument(
-    '--count', required=True, help='Last commits to be deleted')
-
-gits_track_subparser = subparsers.add_parser('track')
-gits_track_subparser.add_argument('file_names',
-                                  metavar='N',
-                                  type=str,
-                                  nargs='+',
-                                  help='all file names')
-gits_track_subparser.set_defaults(func=gits_track)
-
-gits_untrack_subparser = subparsers.add_parser('untrack')
-gits_untrack_subparser.add_argument('file_names',
-                                    metavar='N',
-                                    type=str,
-                                    nargs='+',
-                                    help='all file names')
-gits_untrack_subparser.set_defaults(func=gits_untrack)
-
-gits_undo_subparser = subparsers.add_parser('undo')
-gits_undo_subparser.add_argument('file_names',
-                                 metavar='N',
-                                 type=str,
-                                 nargs='+',
-                                 help='all file names')
-gits_undo_subparser.set_defaults(func=gits_undo)
-
-gits_sync_subparser = subparsers.add_parser('sync')
-gits_sync_subparser.add_argument('-source', help="name of the trunk branch")
-gits_sync_subparser.set_defaults(func=gits_sync)
-
-gits_push_subparser = subparsers.add_parser('push')
-gits_push_subparser.add_argument("--rebase", nargs=1, default=False,
-                                 help="do a pull rebase before pushing the changes",
-                                 required=False)
-gits_push_subparser.set_defaults(func=gits_push)
-
-gits_init_subparser = subparsers.add_parser("init")
-
-gits_init_subparser.add_argument("--bare", action="store_true",
-                                 help="intialize an empty git repositories but omit the working directory")
-gits_init_subparser.add_argument(
-    "--template", help="initialize a git repository using predifined templates")
-gits_init_subparser.add_argument(
-    "--clone_url", help="url for cloning an already existing repo")
-gits_init_subparser.set_defaults(func=gits_init)
-
-gits_pull_subparser = subparsers.add_parser("pull")
-gits_pull_subparser.add_argument("--nocommit", action='store_true',
-                                 help="fetches the remote contain but does not create a new merge commit",
-                                 required=False)
-gits_pull_subparser.add_argument("--rebase", action='store_true',
-                                 help="uses git rebase to merge with the remote branch",
-                                 required=False)
-gits_pull_subparser.add_argument("--branch", nargs="?", default=False,
-                                 help="you can specify the branch you want to pull",
-                                 required=False)
-gits_pull_subparser.set_defaults(func=gits_pull)
-
-gits_super_init_subparser = subparsers.add_parser('super_init', 
-    help='Initializes a new git repo, adds default README.md and .gitignore, and commits them.')
-gits_super_init_subparser.add_argument('--readme-name', default='README.md',
-    help='Custom name for the README file. Default is README.md.')
-gits_super_init_subparser.add_argument('--gitignore-content', default='',
-    help='Content to add in the .gitignore file. By default, it will be empty.')
-gits_super_init_subparser.set_defaults(func=gits_super_init)
-
-
-args = parser.parse_args()
-
-if hasattr(args, 'func'):
-    args.func(args)
-else:
-    parser.print_help()
-    sys.exit(1)
+if __name__ == '__main__':
+    cli()
