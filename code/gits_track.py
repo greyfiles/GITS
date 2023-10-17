@@ -5,7 +5,7 @@ from subprocess import PIPE
 import subprocess
 
 
-def gits_track(args):
+def gits_track(file_names):
     """
     Function that moves files from working directory to the staging directory.
     Only tracked files will be considered for any upcoming files.
@@ -14,7 +14,7 @@ def gits_track(args):
         subprocess_command = list()
         subprocess_command.append("git")
         subprocess_command.append("add")
-        file_names_list = args.file_names
+        file_names_list = file_names
         total_files = len(file_names_list)
         if total_files != 0:
             for i in range(0, total_files):

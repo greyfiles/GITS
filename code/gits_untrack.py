@@ -5,7 +5,7 @@ from subprocess import PIPE
 import subprocess
 
 
-def gits_untrack(args):
+def gits_untrack(file_names):
     """
     Function that moves files from staging area to the working directory.
     Untracked files will not be considered for the upcoming commits.
@@ -15,7 +15,7 @@ def gits_untrack(args):
         subprocess_command.append("git")
         subprocess_command.append("reset")
         subprocess_command.append("HEAD")
-        file_names_list = args.file_names
+        file_names_list = file_names
         total_files = len(file_names_list)
         if total_files != 0:
             for i in range(0, total_files):

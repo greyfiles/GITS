@@ -1,7 +1,7 @@
 import subprocess
 import os
 
-def gits_super_init(args):
+def gits_super_init(readme_name, gitignore_contents, remote_url):
     """
     Initializes a new git repository, adds a default README.md and .gitignore file,
     and commits them. Also, allows the option to push the initial commit to a remote repository.
@@ -30,10 +30,10 @@ def gits_super_init(args):
         print(f"Repository initialized and committed with {readme_name} and .gitignore.")
         
         # Optional: Push to a remote repository if provided
-        if args.remote_url:
-            subprocess.check_call(['git', 'remote', 'add', 'origin', args.remote_url])
+        if remote_url:
+            subprocess.check_call(['git', 'remote', 'add', 'origin', remote_url])
             subprocess.check_call(['git', 'push', '-u', 'origin', 'master'])
-            print(f"Initial commit pushed to remote: {args.remote_url}")
+            print(f"Initial commit pushed to remote: {remote_url}")
 
     except Exception as e:
         print("ERROR: gits super_init command caught an exception")

@@ -5,7 +5,7 @@ from subprocess import PIPE
 import subprocess
 
 
-def gits_undo(args):
+def gits_undo(file_names):
     """
     Function that moves files from working directory to the staging directory.
     Only tracked files will be considered for any upcoming files.
@@ -14,7 +14,7 @@ def gits_undo(args):
         subprocess_command = list()
         subprocess_command.append("git")
         subprocess_command.append("checkout")
-        file_names_list = args.file_names
+        file_names_list = file_names
         total_files = len(file_names_list)
         if total_files != 0:
             for i in range(0, total_files):

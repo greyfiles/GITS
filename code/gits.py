@@ -252,7 +252,19 @@ def merge(branch):
 #gits_reset_subparser.set_defaults(func=gits_reset)
 #gits_reset_subparser.add_argument(
 #    '--branch', required=True, help='branch to be used')
-#
+
+@cli.command('delete', short_help='delete a commit from remote')
+@click.argument('branch', nargs=1, type=click.STRING)
+@click.argument('count', nargs=1, type=click.INT)
+def delete(branch, count):
+    """
+    Function that deletes COUNT commits from BRANCH on the remote
+
+    BRANCH is the name of the branch to remove commits from
+    COUNT  is the number of commits to remove
+    """
+    gits_delete(branch, count)
+
 #gits_reset_subparser = subparsers.add_parser('delete', help='sync help')
 #gits_reset_subparser.set_defaults(func=gits_delete)
 #gits_reset_subparser.add_argument(
@@ -260,6 +272,15 @@ def merge(branch):
 #gits_reset_subparser.add_argument(
 #    '--count', required=True, help='Last commits to be deleted')
 #
+
+@cli.command('track', short_help='add untracked files to working changes')
+@click.argument('file_names', nargs=-1)
+def track(file_names):
+    """
+    Function that adds the passed files to the working set
+    """
+    gits_track(file_names)
+
 #gits_track_subparser = subparsers.add_parser('track')
 #gits_track_subparser.add_argument('file_names',
 #                                  metavar='N',
@@ -267,7 +288,15 @@ def merge(branch):
 #                                  nargs='+',
 #                                  help='all file names')
 #gits_track_subparser.set_defaults(func=gits_track)
-#
+
+@cli.command('untrack', short_help='remove files from working changes')
+@click.argument('file_names', nargs=-1)
+def untrack(file_names):
+    """
+    Function that removes the passed files from the working changeset
+    """
+    gits_untrack(file_names)
+
 #gits_untrack_subparser = subparsers.add_parser('untrack')
 #gits_untrack_subparser.add_argument('file_names',
 #                                    metavar='N',
@@ -275,7 +304,15 @@ def merge(branch):
 #                                    nargs='+',
 #                                    help='all file names')
 #gits_untrack_subparser.set_defaults(func=gits_untrack)
-#
+
+@cli.command('undo', short_help='un-stage files added to staging directory')
+@click.argument('file_names', nargs=-1)
+def undo(file_names):
+    """
+    Function that moves files from the staging directory to the working directory
+    """
+    gits_undo(file_names)
+
 #gits_undo_subparser = subparsers.add_parser('undo')
 #gits_undo_subparser.add_argument('file_names',
 #                                 metavar='N',
@@ -283,19 +320,44 @@ def merge(branch):
 #                                 nargs='+',
 #                                 help='all file names')
 #gits_undo_subparser.set_defaults(func=gits_undo)
-#
+
+@cli.command('sync', short_help='get current state of trunk')
+@click.option('--source', nargs=1, type=click.STRING, help='name of the trunk branch')
+def sync(source):
+    """
+    Function that updates the working directory to be current with a source branch (trunk if unspecified)
+    """
+    gits_sync(source)
+
 #gits_sync_subparser = subparsers.add_parser('sync')
 #gits_sync_subparser.add_argument('-source', help="name of the trunk branch")
 #gits_sync_subparser.set_defaults(func=gits_sync)
-#
+
+@cli.command('push', short_help='get current state of trunk')
+@click.option("--rebase", nargs=1, default=False, help="do a pull rebase before pushing the changes")
+def push(rebase):
+    """
+    Function that sends the record of local commits to remote
+    """
+    gits_push(rebase)
+
 #gits_push_subparser = subparsers.add_parser('push')
 #gits_push_subparser.add_argument("--rebase", nargs=1, default=False,
 #                                 help="do a pull rebase before pushing the changes",
 #                                 required=False)
 #gits_push_subparser.set_defaults(func=gits_push)
-#
+
+@cli.command('init', short_help='setup current folder as git repository')
+@click.option("--bare", is_flag=True, default=False, help='intialize an empty git repositories but omit the working directory')
+@click.option("--template", nargs=1, default=False, help='initialize a git repository using predifined templates')
+@click.option("--clone-url", nargs=1, default=False, help='url for cloning an already existing repo')
+def init(bare, template, clone_url):
+    """
+    Function that sends the record of local commits to remote
+    """
+    gits_init(bare, template, clone_url)
+
 #gits_init_subparser = subparsers.add_parser("init")
-#
 #gits_init_subparser.add_argument("--bare", action="store_true",
 #                                 help="intialize an empty git repositories but omit the working directory")
 #gits_init_subparser.add_argument(
@@ -303,7 +365,17 @@ def merge(branch):
 #gits_init_subparser.add_argument(
 #    "--clone_url", help="url for cloning an already existing repo")
 #gits_init_subparser.set_defaults(func=gits_init)
-#
+
+@cli.command('pull', short_help='get latest state from remote')
+@click.option("--nocommit", is_flag=True, default=False, help='fetch remote without making a merge commit')
+@click.option("--rebase", is_flag=True, default=False, help='use git rebase to merge with remote branch')
+@click.option("--branch", nargs=1, default=False, help='branch to pull')
+def pull(nocommit, template, branch):
+    """
+    Function that pulls down the latest state from remote
+    """
+    gits_pull(nocommit, template, branch)
+
 #gits_pull_subparser = subparsers.add_parser("pull")
 #gits_pull_subparser.add_argument("--nocommit", action='store_true',
 #                                 help="fetches the remote contain but does not create a new merge commit",
@@ -315,7 +387,17 @@ def merge(branch):
 #                                 help="you can specify the branch you want to pull",
 #                                 required=False)
 #gits_pull_subparser.set_defaults(func=gits_pull)
-#
+
+@cli.command('super-init', short_help='setup and initialize a repo')
+@click.option("--readme-name", nargs=1, default=False, help='custom name for README')
+@click.option('--gitignore-content', nargs=1, default=False, help='initial contents of gitignore file')
+@click.option("--remote-url", nargs=1, default=False, help='url for pushing an already existing repo')
+def super_init(readme_name, gitignore_content, remote_url):
+    """
+    Function that initializes and adds files to a generic repository
+    """
+    gits_super_init(readme_name, gitignore_content, remote_url)
+
 #gits_super_init_subparser = subparsers.add_parser('super_init', 
 #    help='Initializes a new git repo, adds default README.md and .gitignore, and commits them.')
 #gits_super_init_subparser.add_argument('--readme-name', default='README.md',

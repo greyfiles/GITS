@@ -4,7 +4,7 @@ import helper
 import gits_logging
 
 
-def gits_pull(args):
+def gits_pull(nocommit, rebase, branch):
     """
     This function is used to pull remote branch and
     merge it into local branch.
@@ -26,16 +26,16 @@ def gits_pull(args):
 
         arguments = []
         curr_branch = helper.get_current_branch()
-        if args.nocommit is True and args.rebase is True:
+        if nocommit is True and rebase is True:
             print("You cannot use both nocommit and rebase at the same time")
             return False
-        elif args.nocommit is True:
+        elif nocommit is True:
             arguments += ["--no-commit"]
-        elif args.rebase is True:
+        elif rebase is True:
             arguments += ["--rebase"]
 
-        if args.branch is not False and args.branch is not None:
-            arguments += [args.branch]
+        if branch is not False and branch is not None:
+            arguments += [branch]
         else:
             arguments += [curr_branch]
 
