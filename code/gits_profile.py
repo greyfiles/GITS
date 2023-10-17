@@ -4,7 +4,7 @@ from subprocess import PIPE
 import gits_logging
 
 
-def gits_set_profile(args):
+def gits_set_profile(email, name):
     """
     This functionality allows the user to change the git account quickly with a single command.
     There are situations when a developer has a personal github account and a enterprise github account as well.
@@ -14,7 +14,7 @@ def gits_set_profile(args):
     # print("Hello from GITS Commandline Tools-Profile")
     try:
         # check regex
-        check_val = check(args.email)
+        check_val = check(email)
         # print(check_val)
         if check_val:
             print("here")
@@ -32,13 +32,13 @@ def gits_set_profile(args):
             stdout, stderr = process1.communicate()
 
             process2 = subprocess.Popen(["git", "config", "--global",
-                                         "user.name", args.name],
+                                         "user.name", name],
                                         stdout=PIPE,
                                         stderr=PIPE)
             stdout, stderr = process2.communicate()
 
             process3 = subprocess.Popen(["git", "config", "--global",
-                                         "user.email", args.email],
+                                         "user.email", email],
                                         stdout=PIPE,
                                         stderr=PIPE)
             stdout, stderr = process3.communicate()
@@ -85,7 +85,7 @@ def gits_set_profile(args):
             print(stdout.decode('utf-8'))
 
         else:
-            print("Enter a valid email id")
+            print("Enter a valid email")
             return False
 
     except Exception as e:

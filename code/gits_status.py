@@ -5,7 +5,7 @@ import subprocess
 import gits_logging
 
 
-def gits_status(args):
+def gits_status():
     """
     Function that allows users to show status about
     1. changes present in the working directory but not in the staging area.

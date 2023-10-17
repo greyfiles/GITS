@@ -5,7 +5,7 @@ from subprocess import PIPE
 import subprocess
 
 
-def gits_add_func(args):
+def gits_add_func(file_names):
     """
     Function that adds files as passed
     to the gits add command.
@@ -16,7 +16,7 @@ def gits_add_func(args):
         subprocess_command = list()
         subprocess_command.append("git")
         subprocess_command.append("add")
-        file_names_list = args.file_names
+        file_names_list = file_names
         total_files = len(file_names_list)
         if total_files == 0:
             # do nothing

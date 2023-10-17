@@ -44,14 +44,14 @@ def cli():
 
 #parser = argparse.ArgumentParser()
 #subparsers = parser.add_subparsers()
-@cli.command('hello', short_help='should be hidden...')
+@cli.command('hello', short_help='should be hidden...', hidden=True)
 def hello():
     gits_hello_world()
 
 #gits_hello_subparser = subparsers.add_parser('hello_world')
 #gits_hello_subparser.set_defaults(func=gits_hello_world)
 
-@cli.command('set', short_help='set a variable')
+@cli.command('set', short_help='set an environment variable')
 @click.argument('parent', nargs=1, type=click.STRING)
 def set(parent):
     """
@@ -64,14 +64,17 @@ def set(parent):
 #gits_set_subparser.add_argument('--parent', help='git parent branch')
 #gits_set_subparser.set_defaults(func=gits_set_func)
 
-#@click.command('add')
-#@click.argument('file_names', nargs=-1, help='file names to add')
-#def set(file_names):
-#    """
-#    Function that is used to set important
-#    environment variables
-#    """
-#    gits_add_func(file_names)
+@cli.command('add', short_help='add files to be committed')
+@click.argument('file_names', nargs=-1)
+def add(file_names):
+    """
+    Function that adds files as passed
+    to the gits add command.
+    Performs operation as similar to git
+    add command
+    """
+    gits_add_func(file_names)
+
 #gits_add_subparser = subparsers.add_parser('add')
 #gits_add_subparser.add_argument('file_names',
 #                                metavar='N',
@@ -79,7 +82,21 @@ def set(parent):
 #                                nargs='+',
 #                                help='all file names')
 #gits_add_subparser.set_defaults(func=gits_add_func)
-#
+
+@cli.command('commit', short_help='create a changeset with added files')
+@click.argument('message', nargs=1, type=click.STRING)
+@click.option('--amend', is_flag=True, default=False)
+def commit(message, amend):
+    """
+    Function that commit files as staged
+    in the git command line internface
+    Performs operation as similar to git
+    commit command. Future additions : user 
+    can specify if the commit should be rejected,
+    if the unit test fails.
+    """
+    gits_commit_func(message, amend)
+
 #gits_commit_subparser = subparsers.add_parser('commit')
 #gits_commit_subparser.add_argument('-m',
 #                                   required=True,
@@ -88,19 +105,56 @@ def set(parent):
 #                                   action='store_true',
 #                                   help='amend commit message')
 #gits_commit_subparser.set_defaults(func=gits_commit_func)
-#
+
+@cli.command('create', short_help='create a branch')
+@click.argument('name', nargs=1, type=click.STRING)
+def create(name):
+    """
+    Function that creates a new local branch
+    from local master after updating local master
+    from remote master. The idea here is that the 
+    new branch should have all the latest commits.
+    """
+    create_branch(name)
+
 #gits_create_subparser = subparsers.add_parser('create')
 #gits_create_subparser.add_argument('-b', help="branch name to create")
 #gits_create_subparser.set_defaults(func=create_branch)
-#
+
+@cli.command('switch', short_help='swap to a branch')
+@click.argument('branch_name', nargs=1, type=click.STRING)
+def switch(branch_name):
+    """
+    Function that allows user to switch between branches
+    """
+    switch_branch(branch_name)
+
 #gits_switch_subparser = subparsers.add_parser('switch')
 #gits_switch_subparser.add_argument('branch_name', help="branch name to switch")
 #gits_switch_subparser.set_defaults(func=switch_branch)
-#
+
+@cli.command('merge', short_help='merge a branch into current repo')
+@click.argument('branch_name', nargs=1, type=click.STRING)
+def merge(branch_name):
+    """
+    Function that allows user to merge any branch into current branch
+    """
+    merge_branch(branch_name)
+
 #gits_merge_subparser = subparsers.add_parser('merge')
 #gits_merge_subparser.add_argument('branch_name', help="branch name to merge")
 #gits_merge_subparser.set_defaults(func=merge_branch)
-#
+
+@cli.command('upstream', short_help='set an upstream branch')
+@click.option('--remote', nargs=1, type=click.STRING, help='remote branch to set as upstream')
+@click.option('--local', nargs=1, type=click.STRING, help='local branch to be set as downstream')
+@click.option('--upstream', nargs=1, type=click.STRING, help='set upstream for remote branch')
+def upstream(remote, local, upstream):
+    """
+    Function that allows user to merge any branch into current branch
+    """
+    upstream(remote, local, upstream)
+
 #gits_upstream_subparser = subparsers.add_parser('upstream')
 #gits_upstream_subparser.add_argument('--remote',
 #                                     help='the remote branch name')
@@ -109,7 +163,19 @@ def set(parent):
 #gits_upstream_subparser.add_argument('--upstream',
 #                                     help="the upstream branch name")
 #gits_upstream_subparser.set_defaults(func=upstream)
-#
+
+@cli.command('profile', short_help='setup git user')
+@click.argument('email', nargs=1, type=click.STRING)
+@click.argument('name', nargs=1, type=click.STRING)
+def profile(email, name):
+    """
+    Setup the git email and username with EMAIL and NAME
+
+    EMAIL is the github email to set for the profile
+    NAME  is the github username to set for the profile 
+    """
+    gits_set_profile(email, name)
+
 #gits_profile_subparser = subparsers.add_parser('profile', help='profie help')
 #gits_profile_subparser.set_defaults(func=gits_set_profile)
 #gits_profile_subparser.add_argument('--email',
@@ -118,24 +184,70 @@ def set(parent):
 #gits_profile_subparser.add_argument('--name',
 #                                    required=True,
 #                                    help='name to be used')
-#
+
+@cli.command('super-reset', short_help='re-pull the repository')
+@click.option('--name', nargs=1, type=click.STRING)
+def super_reset(name):
+    """
+    Completely restores the current repo to the state of the remote
+    """
+    super_reset(name)
+
 #gits_super_reset_subparser = subparsers.add_parser('super-reset')
 #gits_super_reset_subparser.add_argument('--name',
 #                                        help="Name of the repository to super reset")
 #gits_super_reset_subparser.set_defaults(func=super_reset)
-#
+
+@cli.command('rebase', short_help='rebase from master')
+def rebase():
+    """
+    Function that allows user to interactively rebase from the master branch
+    """
+    gits_rebase()
+
 #gits_rb_subparser = subparsers.add_parser('rebase', help='sync help')
 #gits_rb_subparser.set_defaults(func=gits_rebase)
-#
+
+@cli.command('status', short_help='print current working status')
+def status():
+    """
+    Function that outputs the current state of the local repository
+    """
+    gits_status()
+
 #gits_status_subparser = subparsers.add_parser('status', help='sync help')
 #gits_status_subparser.set_defaults(func=gits_status)
-#
+
+@cli.command('diff', short_help='show differences from last commit')
+def diff():
+    """
+    Function that outputs the changes made since the last commit
+    """
+    gits_diff()
+
 #gits_diff_subparser = subparsers.add_parser('diff', help='sync help')
 #gits_diff_subparser.set_defaults(func=gits_diff)
-#
+
+@cli.command('branch', short_help='show all local branches')
+def branch():
+    """
+    Function that outputs the branches currently pulled in the local repo
+    """
+    gits_branch()
+
 #gits_branch_subparser = subparsers.add_parser('branch', help='sync help')
 #gits_branch_subparser.set_defaults(func=gits_branch)
-#
+
+@cli.command('reset', short_help='hard reset a branch')
+@click.argument('branch', nargs=1, type=click.STRING)
+def merge(branch):
+    """
+    Function that hard resets BRANCH to the same state as remote
+
+    BRANCH is the name of the branch to be reset
+    """
+    gits_reset(branch)
+
 #gits_reset_subparser = subparsers.add_parser('reset', help='sync help')
 #gits_reset_subparser.set_defaults(func=gits_reset)
 #gits_reset_subparser.add_argument(
@@ -220,6 +332,8 @@ def set(parent):
 #else:
 #    parser.print_help()
 #    sys.exit(1)
+
+cli(prog_name='gits')
 
 if __name__ == '__main__':
     cli()

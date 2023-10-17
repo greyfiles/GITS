@@ -5,7 +5,7 @@ import subprocess
 import gits_logging
 
 
-def gits_diff(args):
+def gits_diff():
     """
     Function that allows users to show difference since last commit
     """

@@ -5,7 +5,7 @@ import subprocess
 import gits_logging
 
 
-def merge_branch(args):
+def merge_branch(branch_name):
     """
     Function that allows user to merge any branch into current branch
     """
@@ -13,7 +13,7 @@ def merge_branch(args):
         merge_cmd = list()
         merge_cmd.append("git")
         merge_cmd.append("merge")
-        merge_cmd.append(args.branch_name)
+        merge_cmd.append(branch_name)
         process1 = subprocess.Popen(merge_cmd, stdout=PIPE, stderr=PIPE)
         stdout, stderr = process1.communicate()
         gits_logging.gits_logger.info("gits merge command invoked successfully")

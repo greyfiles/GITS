@@ -6,7 +6,7 @@ import shutil
 import gits_logging
 
 
-def super_reset(args):
+def super_reset(name):
     """
     Function that removes the local repository
     and does a fresh clone.
@@ -15,11 +15,11 @@ def super_reset(args):
     It takes the name of the git repository as a parameter
     """
     try:
-        if not args.name:
+        if not name:
             print("Required parameters are not provided. "
                   "Please add --name parameter.")
             return False
-        os.chdir("./" + args.name)
+        os.chdir("./" + name)
         remote_loc = check_output(["git", "config", "remote.origin.url"])
 
         if not remote_loc:
@@ -29,7 +29,7 @@ def super_reset(args):
         remote_loc = remote_loc.strip().decode("utf-8")
         os.chdir("../")
         print("Removing the current repository...")
-        shutil.rmtree(args.name)
+        shutil.rmtree(name)
         print("Freshly cloning...")
         check_output(["git", "clone", remote_loc])
         gits_logging.gits_logger.info("gits super reset command invoked successfully")

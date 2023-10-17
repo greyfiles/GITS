@@ -5,9 +5,9 @@ import subprocess
 import gits_logging
 
 
-def gits_branch(args):
+def gits_branch():
     """
-    Function that allows users to show difference from last commit
+    Function that allows users to show local branches
     """
     try:
         diff_cmd = list()

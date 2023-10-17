@@ -6,7 +6,7 @@ import subprocess
 import gits_logging
 
 
-def create_branch(args):
+def create_branch(name):
     """
     Function that creates a new local branch
     from local master after updating local master
@@ -29,18 +29,18 @@ def create_branch(args):
         stdout, stderr = process2.communicate()
 
         # checkout new branch
-        if not args.b:
+        if not name:
             print("Name of new branch not provided. Use -b branchName")
             return False
         checkout_feature = list()
         checkout_feature.append("git")
         checkout_feature.append("checkout")
         checkout_feature.append("-b")
-        checkout_feature.append(args.b)
+        checkout_feature.append(name)
         process3 = subprocess.Popen(checkout_feature, stdout=PIPE, stderr=PIPE)
         stdout, stderr = process3.communicate()
         gits_logging.gits_logger.info("gits create command invoked successfully")
-        print("Branch created successfully. Currently you are on branch:", args.b)
+        print("Branch created successfully. Currently you are on branch:", name)
 
     except Exception as e:
         gits_logging.gits_logger.error("gits create command caught an exception")

@@ -5,7 +5,7 @@ import subprocess
 import gits_logging
 
 
-def gits_commit_func(args):
+def gits_commit_func(message, amend):
     """
     Function that commit files as staged
     in the git command line internface
@@ -16,13 +16,12 @@ def gits_commit_func(args):
         subprocess_command = list()
         subprocess_command.append("git")
         subprocess_command.append("commit")
-        commit_message = args.m
-        if not commit_message:
+        if not message:
             print("ERROR: gits commit message not present, aborting")
             return False
         subprocess_command.append("-m")
-        subprocess_command.append(commit_message)
-        if not args.amend:
+        subprocess_command.append(message)
+        if not amend:
             # do nothing
             pass
         else:
