@@ -3,7 +3,7 @@ from subprocess import PIPE
 import gits_logging
 
 
-def upstream(args):
+def upstream(remote, local, upstream):
     """
     Function that modifies the upstream repository.
     It will set upstream for a local branch to a remote branch.
@@ -12,13 +12,13 @@ def upstream(args):
     """
     try:
         # Case of adding upstream to a local branch.
-        if args.remote and args.local:
+        if remote and local:
             local_to_remote_command = list()
             local_to_remote_command.append("git")
             local_to_remote_command.append("branch")
             local_to_remote_command.append(
-                "--set-upstream-to=origin/" + args.remote)
-            local_to_remote_command.append(args.local)
+                "--set-upstream-to=origin/" + remote)
+            local_to_remote_command.append(local)
             # print(local_to_remote_command)
             process = subprocess.Popen(local_to_remote_command,
                                        stdout=PIPE, stderr=PIPE)
@@ -26,7 +26,7 @@ def upstream(args):
 
         # Case of adding upstream to the remote repo.
         # It will be tracking a forked repo then.
-        elif args.upstream:
+        elif upstream:
 
             # first we have to check if the upstream is set or not
             check_upstream_command = list()
@@ -47,7 +47,7 @@ def upstream(args):
                 remote_upstream_command.append("remote")
                 remote_upstream_command.append("set-url")
                 remote_upstream_command.append("upstream")
-                remote_upstream_command.append(args.upstream)
+                remote_upstream_command.append(upstream)
 
                 process2 = subprocess.Popen(remote_upstream_command,
                                             stdout=PIPE, stderr=PIPE)
@@ -60,7 +60,7 @@ def upstream(args):
                 remote_upstream_command.append("remote")
                 remote_upstream_command.append("add")
                 remote_upstream_command.append("upstream")
-                remote_upstream_command.append(args.upstream)
+                remote_upstream_command.append(upstream)
 
                 process3 = subprocess.Popen(remote_upstream_command,
                                             stdout=PIPE, stderr=PIPE)

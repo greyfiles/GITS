@@ -4,7 +4,7 @@ import helper
 import gits_logging
 
 
-def gits_sync(args):
+def gits_sync(source):
     try:
         untracked_file_check_status = list()
         untracked_file_check_status.append("git")
@@ -21,8 +21,8 @@ def gits_sync(args):
             return False
 
         curr_branch = helper.get_current_branch()
-        if args.source:
-            source_branch = args.source
+        if source:
+            source_branch = source
         else:
             source_branch = helper.get_trunk_branch_name()
 

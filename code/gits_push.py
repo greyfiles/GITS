@@ -4,7 +4,7 @@ import helper
 import gits_logging
 
 
-def gits_push(args):
+def gits_push(rebase):
     """
     This function is used to push local changes to remote branch.
     Usage: gits push
@@ -23,9 +23,9 @@ def gits_push(args):
 
         _ = helper.get_current_branch()
 
-        if args.rebase is not False:
+        if rebase is not False:
             print("Pulling changes from Upstream source branch and rebasing it")
-            pull_rebase = ["git", "pull", "--rebase", "origin", args.rebase]
+            pull_rebase = ["git", "pull", "--rebase", "origin", rebase]
             process1 = subprocess.Popen(pull_rebase, stdout=PIPE, stderr=PIPE)
             stdout, stderr = process1.communicate()
             print(stdout.decode("utf-8"))
