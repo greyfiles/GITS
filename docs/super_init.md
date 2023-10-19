@@ -7,7 +7,7 @@ The code that implements this enhanced gits functionality is located [here](http
 # Code Description
 ## Functions
 1. `gits_super_init(args)`:
-This function takes an optional argument `--remote_url`. If `--remote_url` is provided, after the repository initialization and committing the default files, the command will link the repository to the provided remote URL and push the initial commit. This is especially handy when starting a new project that you know will be pushed to a remote repository.
+This function takes an optional argument `--remote_url`. If `--remote_url` is provided, after the repository initialization and committing the default files, the command will link the repository to the provided remote URL and push the initial commit. This is especially handy when starting a new project that you know will be pushed to a remote repository. You need to Set your Git username and email first.
 
 # How to run it? (Small Example)
 There are two main ways to use `gits super_init`:
@@ -17,5 +17,5 @@ $ gits super_init
 This will initialize the directory, create and commit a `README.md` and `.gitignore` file.
 
 - Linking to a remote repository:
-$ gits super_init --remote_url https://github.com/username/repo.git
+$ git remote set-url origin https://USERNAME:TOKEN@github.com/username/repository.git
 This will perform all the above actions and additionally add the provided URL as a remote named `origin`. The initial commit will then be pushed to the `master` or `main` branch of this remote repository.
