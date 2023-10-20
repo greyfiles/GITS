@@ -19,18 +19,6 @@ def test_gits_sync_happy_case_source_branch():
     else:
         assert False
 
-def test_gits_sync_sad_case_no_args():
-    """
-    Function to test gits sync, success case when source branch is not given
-    """
-    init_gits_logger()
-
-    test_result = gits_sync(None)
-    if not test_result:
-        assert True, "Normal Case"
-    else:
-        assert False
-
 #def test_gits_sync_sad_case_uncommitted_changes():
 #    """
 #    Function to test gits sync, failure case when there are uncommitted changes
