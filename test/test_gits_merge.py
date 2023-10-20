@@ -5,40 +5,27 @@ import sys
 sys.path.insert(1, os.getcwd())
 
 from gits_merge import merge_branch
-from mock import patch, Mock
+from gits_logging import init_gits_logger
 
-
-def parse_args(args):
-    parser = argparse.ArgumentParser()
-    return parser.parse_args(args)
-
-
-@patch("argparse.ArgumentParser.parse_args", return_value=argparse.Namespace(branch_name="branch name"))
-@patch("subprocess.Popen")
-def test_git_create_branch_happy_case(mock_var, mock_args):
+def test_git_create_branch_happy_case():
     """
     Function to test gits_merge_branch, success case
     """
-    mocked_pipe = Mock()
-    attrs = {'communicate.return_value': ('output'.encode('UTF-8'), 'error'), 'returncode': 0}
-    mocked_pipe.configure_mock(**attrs)
-    mock_var.return_value = mocked_pipe
+    init_gits_logger()
 
-    mock_args = parse_args(mock_args)
-    test_result = merge_branch(mock_args)
+    test_result = merge_branch("branch_name")
     if test_result:
         assert True, "Normal Case"
     else:
         assert False
 
-
-@patch("argparse.ArgumentParser.parse_args", return_value=argparse.Namespace())
-def test_git_create_branch_sad_case(mock_args):
+def test_git_create_branch_sad_case():
     """
     Function to test gits_merge_branch, failure case when no arguments
     """
-    mock_args = parse_args(mock_args)
-    test_result = merge_branch(mock_args)
+    init_gits_logger()
+
+    test_result = merge_branch(None)
     if not test_result:
         assert True, "Normal Case"
     else:

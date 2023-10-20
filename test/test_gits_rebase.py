@@ -1,67 +1,46 @@
-import argparse
 import os
 import sys
 
 sys.path.insert(1, os.getcwd())
 
 from gits_rebase import gits_rebase
-from mock import patch, Mock
+from gits_logging import init_gits_logger
+from mock import patch
 
-
-@patch("argparse.ArgumentParser.parse_args",
-       return_value=argparse.Namespace())
-@patch("subprocess.Popen")
-@patch("builtins.input", return_value="yes")
-def test_gits_rebase_happy_case_current_branch(mock_input, mock_var, mock_args):
+def test_gits_rebase_happy_case_current_branch():
     """
     Function to test gits rebase, success case with rebase on current branch
     """
-    mocked_pipe = Mock()
-    attrs = {'communicate.return_value': ('output'.encode('UTF-8'), 'error'), 'returncode': 0}
-    mocked_pipe.configure_mock(**attrs)
-    mock_var.return_value = mocked_pipe
+    init_gits_logger()
 
-    test_result = gits_rebase(mock_args)
+    with patch('builtins.input', return_value="yes"):
+        test_result = gits_rebase()
     if test_result:
         assert True, "Normal Case"
     else:
         assert False
 
-
-@patch("argparse.ArgumentParser.parse_args",
-       return_value=argparse.Namespace())
-@patch("subprocess.Popen")
-@patch("builtins.input", side_effect=["no", "branch name"])
-def test_gits_rebase_happy_case_given_branch(mock_input, mock_var, mock_args):
+def test_gits_rebase_happy_case_given_branch():
     """
     Function to test gits rebase, success case with rebase on given branch
     """
-    mocked_pipe = Mock()
-    attrs = {'communicate.return_value': ('output'.encode('UTF-8'), 'error'), 'returncode': 0}
-    mocked_pipe.configure_mock(**attrs)
-    mock_var.return_value = mocked_pipe
+    init_gits_logger()
 
-    test_result = gits_rebase(mock_args)
+    with patch('builtins.input', side_effect=["yes", "branch name"]):
+        test_result = gits_rebase()
     if test_result:
         assert True, "Normal Case"
     else:
         assert False
 
-
-@patch("argparse.ArgumentParser.parse_args",
-       return_value=argparse.Namespace())
-@patch("subprocess.Popen")
-@patch("builtins.input", side_effect=["no", "branch name"])
-def test_gits_rebase_sad_case(mock_input, mock_var, mock_args):
+def test_gits_rebase_sad_case():
     """
     Function to test gits rebase, failure case
     """
-    mocked_pipe = Mock()
-    attrs = {'communicate.return_value': ('output', 'error'), 'returncode': 0}
-    mocked_pipe.configure_mock(**attrs)
-    mock_var.return_value = mocked_pipe
+    init_gits_logger()
 
-    test_result = gits_rebase(mock_args)
+    with patch('builtins.input', side_effect=["no", None]):
+        test_result = gits_rebase()
     if not test_result:
         assert True, "Normal Case"
     else:
