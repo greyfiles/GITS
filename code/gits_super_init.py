@@ -30,7 +30,7 @@ def gits_super_init(readme_name, gitignore_contents, remote_url):
         print(f"Repository initialized and committed with {readme_name} and .gitignore.")
         
         # Optional: Push to a remote repository if provided
-        if remote_url:
+        if remote_url is not False: 
             subprocess.check_call(['git', 'remote', 'add', 'origin', remote_url])
             subprocess.check_call(['git', 'push', '-u', 'origin', 'master'])
             print(f"Initial commit pushed to remote: {remote_url}")

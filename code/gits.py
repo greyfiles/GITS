@@ -248,9 +248,9 @@ def pull(nocommit, template, branch):
     gits_pull(nocommit, template, branch)
 
 @cli.command('super-init', short_help='setup and initialize a repo')
-@click.option("--readme-name", nargs=1, default=False, help='custom name for README')
-@click.option('--gitignore-content', nargs=1, default=False, help='initial contents of gitignore file')
-@click.option("--remote-url", nargs=1, default=False, help='url for pushing an already existing repo')
+@click.option("--readme-name", default=None, type=str, help='custom name for README')  # change default to none,  type=str ensures the input is treated as a string
+@click.option('--gitignore-content', default=None, type=str, help='initial contents of .gitignore file')  # same as above
+@click.option("--remote-url", default=None, type=str, help='URL for the remote repository')  # same as above
 def super_init(readme_name, gitignore_content, remote_url):
     """
     Function that initializes and adds files to a generic repository

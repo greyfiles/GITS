@@ -3,7 +3,7 @@
 
 |Notes|Score (78)|evidence|
 |-----|-----|---------|
-|Video| 3 |2min video of new functionality, showing a significant delta from prior.|
+| Video                                       | 3     | [2min video of new functionality, showing a significant delta from prior.](https://youtu.be/S_b4Sut4POI)  |
 |Workload is spread over the whole team | 3 |[evidence in GH](https://github.com/greyfiles/GITS/pulse/monthly)|
 |Number of commits| 3|[in GH](https://github.com/greyfiles/GITS/pulse/monthly)|
 |Number of commits: by different people| 3|[in GH](https://github.com/greyfiles/GITS/graphs/contributors)|
