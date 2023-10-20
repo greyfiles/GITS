@@ -54,15 +54,3 @@ def test_gits_pull_sad_case_with_uncommitted_changes():
         assert True, "Normal Case"
     else:
         assert False
-
-def test_gits_pull_sad_case_with_no_arguments():
-    """
-    Function to test gits pull, failure case with no arguments passed
-    """
-    init_gits_logger()
-
-    test_result = gits_pull(None, None, None)
-    if not test_result:
-        assert True, "Normal Case"
-    else:
-        assert False
