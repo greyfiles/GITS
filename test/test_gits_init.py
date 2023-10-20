@@ -19,45 +19,33 @@ def remove_extras(path):
         except:
             os.remove(file)
 
-
-@patch("argparse.ArgumentParser.parse_args",
-       return_value=argparse.Namespace(barre=None, template=None, amend=True))
-@patch("subprocess.Popen", return_value="anything")
-def test_gits_init_normal(mock_var1, mock_args):
+def test_gits_init_normal():
     """
     Function to test gits init, success case
     """
-    test_result = gits_init(mock_args)
+    test_result = gits_init(None, None)
     remove_extras(".")
     if test_result:
         assert True, "Normal Init"
     else:
         assert False
 
-
-@patch("argparse.ArgumentParser.parse_args",
-       return_value=argparse.Namespace(barre=True, template=None, amend=True))
-@patch("subprocess.Popen", return_value="anything")
-def test_gits_init_bare(mock_var1, mock_args):
+def test_gits_init_bare():
     """
     Function to test gits init --bare, success case
     """
-    test_result = gits_init(mock_args)
+    test_result = gits_init(True, None)
     remove_extras(".")
     if test_result:
         assert True, "Bare Init"
     else:
         assert False
 
-
-@patch("argparse.ArgumentParser.parse_args",
-       return_value=argparse.Namespace(barre=None, template="test_template", amend=True))
-@patch("subprocess.Popen", return_value="anything")
-def test_gits_init_template(mock_var1, mock_args):
+def test_gits_init_template():
     """
     Function to test gits init --template, success case
     """
-    test_result = gits_init(mock_args)
+    test_result = gits_init(None, "test_template")
     remove_extras(".")
     if test_result:
         assert True, "Normal Case"

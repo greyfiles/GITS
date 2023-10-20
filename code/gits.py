@@ -230,12 +230,12 @@ def push(rebase):
 @cli.command('init', short_help='setup current folder as git repository')
 @click.option("--bare", is_flag=True, default=False, help='intialize an empty git repositories but omit the working directory')
 @click.option("--template", nargs=1, default=False, help='initialize a git repository using predifined templates')
-@click.option("--clone-url", nargs=1, default=False, help='url for cloning an already existing repo')
-def init(bare, template, clone_url):
+#@click.option("--clone-url", nargs=1, default=False, help='url for cloning an already existing repo')
+def init(bare, template):
     """
     Function that sends the record of local commits to remote
     """
-    gits_init(bare, template, clone_url)
+    gits_init(bare, template)
 
 @cli.command('pull', short_help='get latest state from remote')
 @click.option("--nocommit", is_flag=True, default=False, help='fetch remote without making a merge commit')

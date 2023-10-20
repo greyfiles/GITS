@@ -2,7 +2,7 @@ from subprocess import Popen, PIPE
 import gits_logging
 
 
-def gits_init(bare, template, clone_url):
+def gits_init(bare, template):
     """
     This function allows user to transform current
     directory into a Git repository.
@@ -15,15 +15,15 @@ def gits_init(bare, template, clone_url):
          gits init --template path-to-template
     """
     try:
-        if clone_url:
-            process_commands = ["git", "clone", clone_url]
-        else:
-            process_commands = ["git", "init"]
-            if bare is not False and bare is not None:
-                process_commands.append("--bare")
-            elif template is not None:
-                process_commands.append("--template")
-                process_commands.append(template)
+        #if clone_url:
+        #    process_commands = ["git", "clone", clone_url]
+        #else:
+        process_commands = ["git", "init"]
+        if bare is not False and bare is not None:
+            process_commands.append("--bare")
+        elif template is not None and template is not False:
+            process_commands.append("--template")
+            process_commands.append(template)
 
         process = Popen(process_commands, stdout=PIPE, stderr=PIPE)
         stdout, stderr = process.communicate()
